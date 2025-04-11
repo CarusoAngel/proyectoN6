@@ -1,0 +1,28 @@
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const connectDB = require("./config/db");
+
+// Configuración de variables de entorno
+dotenv.config();
+
+// Inicializa Express
+const app = express();
+
+// Middleware
+app.use(express.json());
+app.use(cors());
+
+// Conexión a MongoDB
+connectDB();
+
+// Ruta de prueba
+app.get("/", (req, res) => {
+  res.send("¡Servidor funcionando correctamente!");
+});
+
+// Levanta el servidor
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+  console.log(`🚀 Servidor corriendo en puerto ${PORT}`);
+});
