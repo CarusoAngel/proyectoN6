@@ -13,9 +13,13 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Connectar rutas
+// Connectar rutas de usuario
 const userRoutes = require ("./routes/userRoutes");
 app.use("/api/user", userRoutes);
+
+// Conectar rutas de producftos 
+const productRoutes = require("./routes/productRoutes");
+app.use("/api/product", productRoutes);
 
 // Conexión a MongoDB
 connectDB();
