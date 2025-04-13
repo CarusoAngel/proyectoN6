@@ -79,8 +79,43 @@ const loginUsuario = async (req, res) => {
     }
 };
 
+// Verificar Token usuaritio 
+
+const verificarTokenUsuario = (req, res) => {
+  res.status(200).json({ msg: "Token válido", usuario: req.usuario });
+};
+
+// Actualizar usuario 
+
+const actualizarUsuario = async (req, res) => {
+  try {
+    const { nombre, email, password } = req.body;
+    const usuario = await Usuario.findById(req.usuario.id);
+
+    if (!usuario) {
+      return res.status(404).json({ msg: "Usuario no encontrado" });
+    }
+
+    if (nombre) usuario.nombre = nombre;
+    if (email) usuario.email = email;
+    if (password) {
+      const salt = await bcrypt.genSalt(10);
+      usuario.password = await bcrypt.hash(password, salt);
+    }
+
+    await usuario.save();
+
+    res.status(200).json({ msg: "Usuario actualizado correctamente" });
+  } catch (error) {
+    res.status(500).json({ msg: "Error al actualizar usuario", error: error.message });
+  }
+};
+
+
 module.exports = {
   registrarUsuario,
   obtenerUsuarios,
   loginUsuario,
+  verificarTokenUsuario,
+  actualizarUsuario,
 };

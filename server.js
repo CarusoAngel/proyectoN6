@@ -19,7 +19,7 @@ app.use("/api/user", userRoutes);
 
 // Conectar rutas de producftos 
 const productRoutes = require("./routes/productRoutes");
-app.use("/api/product", productRoutes);
+app.use("/api/v1/product", productRoutes);
 
 // Conexión a MongoDB
 connectDB();

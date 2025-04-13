@@ -11,10 +11,10 @@ const {
 const verificarToken = require("../middlewares/authMiddleware");
 
 // Crear un producto
-router.post("/create", verificarToken, crearProducto);
+router.post("/", verificarToken, crearProducto);
 
 // Obtener todos los productos 
-router.get("/all", obtenerProductos);
+router.get("/", obtenerProductos);
 
 // Obtener prodcutos por ID
 router.get("/:id", obtenerProductoPorId);
