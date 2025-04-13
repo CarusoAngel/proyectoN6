@@ -1,5 +1,6 @@
 const bcrypt = require("bcryptjs");
 const Usuario = require("../models/userModel");
+const jwt = require("jsonwebtoken");
 
 // Registrar nuevo usuario
 const registrarUsuario = async (req, res) => {
@@ -64,7 +65,15 @@ const loginUsuario = async (req, res) => {
       return res.status(400).json({ msg: "Credenciales inválidas" });
     }
 
-    res.status(200).json({ msg: "Login exitoso" });
+    // Generar token
+    const token = jwt.sign({ id: usuario._id }, process.env.JWT_SECRET, {
+      expiresIn: "1d",
+    });
+
+    res.status(200).json({
+      msg: "Login exitoso",
+      token,
+});
   } catch (error) {
     res.status(500).json({ msg: "Error al iniciar sesión", error: error.message });
     }

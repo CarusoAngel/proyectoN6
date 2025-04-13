@@ -8,8 +8,10 @@ const {
     eliminarProductoPorId,
 } = require("../controllers/productController");
 
-// Ruta para crear un producto
-router.post("/create", crearProducto);
+const verificarToken = require("../middlewares/authMiddleware");
+
+// Crear un producto
+router.post("/create", verificarToken, crearProducto);
 
 // Obtener todos los productos 
 router.get("/all", obtenerProductos);
@@ -17,10 +19,10 @@ router.get("/all", obtenerProductos);
 // Obtener prodcutos por ID
 router.get("/:id", obtenerProductoPorId);
 
-//Actualizar prodcuto
-router.put("/:id", actualizarProducto);
+// Actualizar producto
+router.put("/:id", verificarToken, actualizarProducto);
 
 // Eliminar producto por ID
-router.delete("/:id", eliminarProductoPorId);
+router.delete("/:id", verificarToken, eliminarProductoPorId);
 
 module.exports = router;
