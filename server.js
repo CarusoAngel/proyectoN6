@@ -15,7 +15,7 @@ app.use(cors());
 
 // Connectar rutas de usuario
 const userRoutes = require ("./routes/userRoutes");
-app.use("/api/user", userRoutes);
+app.use("/api/v1/user", userRoutes);
 
 // Conectar rutas de producftos 
 const productRoutes = require("./routes/productRoutes");

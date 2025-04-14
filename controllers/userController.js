@@ -97,7 +97,13 @@ const actualizarUsuario = async (req, res) => {
     }
 
     if (nombre) usuario.nombre = nombre;
-    if (email) usuario.email = email;
+    if (email && email !== usuario.email) {
+      const emailExistente = await Usuario.findOne({ email });
+      if (emailExistente) {
+        return res.status(400).json({ msg: "El correo ya está registrado por otro usuario" });
+      }
+      usuario.email = email;
+    }
     if (password) {
       const salt = await bcrypt.genSalt(10);
       usuario.password = await bcrypt.hash(password, salt);
