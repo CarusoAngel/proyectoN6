@@ -80,6 +80,48 @@ Este proyecto es una API REST desarrollada con Node.js, Express y MongoDB (usand
 ✔ Verificación de token con `/verifytoken`.  
 ✔ Endpoint `/user/update` funcionando y con validación de email duplicado.
 
+### Despliegue en Render
+
+La API se encuentra desplegada en Render y puede ser utilizada desde el siguiente enlace base:
+
+**https://proyecto6-backend.onrender.com**
+
+#### Endpoints disponibles:
+
+##### Usuarios (`/api/v1/user`)
+
+- `POST /register` – Registrar un nuevo usuario  
+- `POST /login` – Iniciar sesión y obtener token  
+- `GET /verifytoken` – Verificar validez de un token (requiere JWT)  
+- `PUT /update` – Actualizar datos del usuario (requiere JWT)
+
+##### Productos (`/api/v1/product`)
+
+- `POST /` – Crear producto (requiere JWT)  
+- `GET /` – Obtener todos los productos  
+- `GET /:id` – Obtener producto por ID  
+- `PUT /:id` – Actualizar producto por ID (requiere JWT)  
+- `DELETE /:id` – Eliminar producto por ID (requiere JWT)
+
+---
+
+### Notas:
+
+- Todos los endpoints protegidos requieren enviar un **token JWT** en el encabezado:
+  ```
+  Authorization: Bearer <token>
+  ```
+
+- Las solicitudes deben enviarse en formato JSON (`Content-Type: application/json`).
+
+## Documentación Swagger
+
+La documentación de la API está disponible con Swagger UI:
+
+🔗 [https://proyecto6-backend.onrender.com/api-docs](https://proyecto6-backend.onrender.com/api-docs)
+
+Incluye soporte para autenticación con JWT (botón **Authorize**), lo que permite probar los endpoints protegidos desde la interfaz web.
+
 ## Autor
 
 Desarrollado por: Angel Caruso
